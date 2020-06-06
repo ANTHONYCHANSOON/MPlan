@@ -12,6 +12,9 @@ app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost:27017/mPlanDB", { useNewUrlParser: true, useUnifiedTopology: true })
 
+
+
+
 app.get("/", function(req, res) {
     res.render("home", {
         name : "Anthony",
