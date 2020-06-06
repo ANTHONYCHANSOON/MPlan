@@ -23,10 +23,12 @@
 </nav>
 
 <div class="jumbotron">
-    <h1 class="display-4">Hello, <%= name %>!</h1>
-    <p>Need to buy The following</p>
-    <p>put list here</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    <h1 class="display-4">Hello, <%= user %>!</h1>
+    <p style="font-weight: bold;">Need to buy The following</p>
+    <% inventorydata.forEach(function(inventory){ %>
+        <p><%= inventory.name %></p>
+    <% }) %>
+    
 </div>
 
 <div class="container">
