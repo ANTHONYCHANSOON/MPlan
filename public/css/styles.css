@@ -1,11 +1,35 @@
 body {
-    background-color: lightblue;
+    background-color: #222831 !important;
+    color: #eeeeee !important;
+}
+.navbarlink {
+    color : #eeeeee !important;
 }
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: black;
-    text-align: center;
+    background-color: #00adb5 !important;
+    text-align: center !important;
+}
+
+.navbar {
+    background-color: #00adb5 !important;
+}
+
+.jumbotron {
+    background-color: #393e46 !important;
+    margin-bottom: 0px !important;
+    border-radius: 0 !important;
+}
+
+.mealdiv {
+    background-color: #222831 !important;
+    padding: 10px 0px 10px !important;
+    text-align: center !important;
+}
+
+.footertext {
+    color : #393e46 !important;
+}
+
+.perday {
+    padding : 10px 0px !important;
 }
