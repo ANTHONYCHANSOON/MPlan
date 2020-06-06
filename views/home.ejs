@@ -8,17 +8,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">Monday</a>
-            <a class="nav-item nav-link" href="#">Tuesday</a>
-            <a class="nav-item nav-link" href="#">Wednesday</a>
-            <a class="nav-item nav-link" href="#">Thursday</a>
-            <a class="nav-item nav-link" href="#">Friday</a>
-            <a class="nav-item nav-link" href="#">Saturday</a>
-            <a class="nav-item nav-link" href="#">Sunday</a>
+            <a class="nav-item nav-link" href="#Monday">Monday</a>
+            <a class="nav-item nav-link" href="#Tuesday">Tuesday</a>
+            <a class="nav-item nav-link" href="#Wednesday">Wednesday</a>
+            <a class="nav-item nav-link" href="#Thursday">Thursday</a>
+            <a class="nav-item nav-link" href="#Friday">Friday</a>
+            <a class="nav-item nav-link" href="#Saturday">Saturday</a>
+            <a class="nav-item nav-link" href="#Sunday">Sunday</a>
         </div>
     </div>
     <div>
-        <a href="#" class = "navbarlink">Link for Inventory</a>
+        <a href="#" class="navbarlink">Link for Inventory</a>
     </div>
 </nav>
 
@@ -34,26 +34,29 @@
 <div class="container mealdiv">
 
     <% mealdata.forEach(function(meal){ %>
-    <h3><%= meal.day %></h3>
 
-    <div class="row perday">
-        <div class="col">
-            <h4>Breakfast</h4>
-            <h5><%= meal.mealForTheDay.breakfast.name %></h5>
-        </div>
-        <div class="col">
-            <h4>Lunch</h4>
-            <h5><%=meal.mealForTheDay.lunch.name %></h5>
-        </div>
-        <div class="col">
-            <h4>Dinner</h4>
-            <h5><%=meal.mealForTheDay.dinner.name %></h5>
-        </div>
-        <div class="col">
-            <h4>Expand</h4>
+    <div id="<%= meal.day %>">
+        <h3><%= meal.day %></h3>
+
+        <div class="row perday">
+            <div class="col">
+                <h4>Breakfast</h4>
+                <h5><%= meal.mealForTheDay.breakfast.name %></h5>
+            </div>
+            <div class="col">
+                <h4>Lunch</h4>
+                <h5><%=meal.mealForTheDay.lunch.name %></h5>
+            </div>
+            <div class="col">
+                <h4>Dinner</h4>
+                <h5><%=meal.mealForTheDay.dinner.name %></h5>
+            </div>
+            <div class="col">
+                <a href="/specificmeal/<%= meal.day %>"> Expand </a>
+            </div>
         </div>
     </div>
-    
+
     <% }) %>
 </div>
 

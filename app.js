@@ -63,6 +63,21 @@ app.get("/", function (req, res) {
     })
 })
 
+app.get("/specificmeal/:specificday", function(req, res) {
+    //console.log(req.params.specificday);
+    const requestedDay = req.params.specificday;
+
+    dailyMeal.findOne({day: requestedDay}, function(err, data){
+        if(!err) {
+            console.log(data);
+            res.render("piece", {
+                day :requestedDay,
+                specificdata : data
+            })
+        }
+    })
+})
+
 let port = process.env.PORT;
 if (port == null || port == "") {
     port = 3000;
