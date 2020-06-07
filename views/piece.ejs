@@ -26,7 +26,7 @@
 
 <div class="wrapper">
     <h1 class="dayyy"><%= day %></h1>
-
+    <br>
     <div class="details">
         <div class="breakfast">
             <h3>Breakfast</h3>
@@ -35,8 +35,10 @@
             <a href="<%= specificdata.mealForTheDay.breakfast.link %>" target="_blank">Recipe</a>
             <br>
             <a href="<%= specificdata.mealForTheDay.breakfast.video %>" target="_blank">Video Reference</a>
-        </div>
+            <br>
 
+        </div>
+        <br>
         <div class="lunch">
             <h3>Lunch</h3>
             <h4>Name : <%= specificdata.mealForTheDay.lunch.name %></h4>
@@ -45,7 +47,7 @@
             <br>
             <a href="<%= specificdata.mealForTheDay.lunch.video %>" target="_blank">Video Reference</a>
         </div>
-
+        <br>
         <div class="Dinner">
             <h3>Dinner</h3>
             <h4>Name : <%= specificdata.mealForTheDay.dinner.name %></h4>
@@ -54,6 +56,7 @@
             <br>
             <a href="<%= specificdata.mealForTheDay.dinner.video %>" target="_blank">Video Reference</a>
         </div>
+        <br>
     </div>
 
 
@@ -62,6 +65,9 @@
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#staticBackdrop">
             Edit
         </button>
+        <br>
+        <br>
+        <br>
     </div>
     <!-- Modal -->
     <form action="/updatemeal/<%= day %>" method="post">
@@ -118,8 +124,8 @@
 
                             <label class="colorblack col-sm-4">Ingredient :</label>
                             <div class="col-sm-8">
-                                <input type="text" name="lingredient" value="<%= specificdata.mealForTheDay.lunch.recipe %>"
-                                    size="30">
+                                <input type="text" name="lingredient"
+                                    value="<%= specificdata.mealForTheDay.lunch.recipe %>" size="30">
                             </div>
 
 
@@ -147,8 +153,8 @@
 
                             <label class="colorblack col-sm-4">Ingredient :</label>
                             <div class="col-sm-8">
-                                <input type="text" name="dingredient" value="<%= specificdata.mealForTheDay.dinner.recipe %>"
-                                    size="30">
+                                <input type="text" name="dingredient"
+                                    value="<%= specificdata.mealForTheDay.dinner.recipe %>" size="30">
                             </div>
 
 
@@ -167,7 +173,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" name= "newlist" value = "<%= day %>">Save</button>
+                        <button type="submit" class="btn btn-primary" name="newlist" value="<%= day %>">Save</button>
                     </div>
                 </div>
             </div>

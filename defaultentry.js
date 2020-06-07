@@ -39,3 +39,11 @@
 // meal1.save();
 
 //https://colorhunt.co/palette/2763
+
+{/* <a class="nav-item nav-link" href="#Monday">Monday</a>
+            <a class="nav-item nav-link" href="#Tuesday">Tuesday</a>
+            <a class="nav-item nav-link" href="#Wednesday">Wednesday</a>
+            <a class="nav-item nav-link" href="#Thursday">Thursday</a>
+            <a class="nav-item nav-link" href="#Friday">Friday</a>
+            <a class="nav-item nav-link" href="#Saturday">Saturday</a>
+            <a class="nav-item nav-link" href="#Sunday">Sunday</a> */}
