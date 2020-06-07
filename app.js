@@ -8,9 +8,9 @@ const app = express();
 app.set('view engine', 'ejs')
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
-mongoose.connect("mongodb://localhost:27017/mPlanDB", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb://localhost:27017/mPlanDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
 const inventorySchema = {
     name: String
@@ -48,10 +48,10 @@ app.get("/", function (req, res) {
 
     Inventory.find({}, function (err, inventorydata) {
         if (!err) {
-            dailyMeal.find({}, function(err, mealdata) {
-                if (!err){
-                    console.log(mealdata);
-                    console.log(mealdata[0].mealForTheDay.breakfast);
+            dailyMeal.find({}, function (err, mealdata) {
+                if (!err) {
+                    //console.log(mealdata);
+                    //console.log(mealdata[0].mealForTheDay.breakfast);
                     res.render("home", {
                         user: "Anthony",
                         inventorydata: inventorydata,
@@ -63,17 +63,67 @@ app.get("/", function (req, res) {
     })
 })
 
-app.get("/specificmeal/:specificday", function(req, res) {
+app.get("/specificmeal/:specificday", function (req, res) {
     //console.log(req.params.specificday);
     const requestedDay = req.params.specificday;
 
-    dailyMeal.findOne({day: requestedDay}, function(err, data){
-        if(!err) {
-            console.log(data);
+    dailyMeal.findOne({ day: requestedDay }, function (err, data) {
+        if (!err) {
+            //console.log(data);
             res.render("piece", {
-                day :requestedDay,
-                specificdata : data
+                day: requestedDay,
+                specificdata: data
             })
+        }
+    })
+})
+
+app.post("/updatemeal/:specificday", function (req, res) {
+    const daytobeupdated = req.params.specificday;
+    console.log(daytobeupdated);
+    const bname = req.body.bname;
+    const bingredient = req.body.bingredient;
+    const blink = req.body.blink;
+    const bvideo = req.body.bvideo;
+    console.log(bname, bingredient, blink, bvideo)
+
+    const lname = req.body.lname;
+    const lingredient = req.body.lingredient;
+    const llink = req.body.llink;
+    const lvideo = req.body.lvideo;
+    console.log(lname, lingredient, llink, lvideo);
+
+    const dname = req.body.dname;
+    const dingredient = req.body.dingredient;
+    const dlink = req.body.dlink;
+    const dvideo = req.body.dvideo;
+    console.log(dname, dingredient, dlink, dvideo);
+
+    let newobj = {
+        breakfast : {
+            name : bname,
+            recipe : bingredient,
+            link : blink,
+            video :bvideo
+        },
+        lunch : {
+            name :lname,
+            recipe : lingredient,
+            link : llink,
+            video : lvideo
+        },
+        dinner : {
+            name : dname,
+            recipe : dingredient,
+            link : dlink,
+            video : dvideo
+        }
+    }
+
+    dailyMeal.findOneAndUpdate({ day: daytobeupdated }, { mealForTheDay: newobj}, function (err) {
+        if (!err) {
+            console.log("success");
+            res.redirect("/specificmeal/" + daytobeupdated);
         }
     })
 })
