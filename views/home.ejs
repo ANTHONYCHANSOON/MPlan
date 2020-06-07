@@ -8,14 +8,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#Monday">Monday</a>
-            <a class="nav-item nav-link" href="#Tuesday">Tuesday</a>
-            <a class="nav-item nav-link" href="#Wednesday">Wednesday</a>
-            <a class="nav-item nav-link" href="#Thursday">Thursday</a>
-            <a class="nav-item nav-link" href="#Friday">Friday</a>
-            <a class="nav-item nav-link" href="#Saturday">Saturday</a>
-            <a class="nav-item nav-link" href="#Sunday">Sunday</a>
+            <a class="nav-item nav-link" href="/specificmeal/Monday">Monday</a>
+            <a class="nav-item nav-link" href="/specificmeal/Tuesday">Tuesday</a>
+            <a class="nav-item nav-link" href="/specificmeal/Wednesday">Wednesday</a>
+            <a class="nav-item nav-link" href="/specificmeal/Thursday">Thursday</a>
+            <a class="nav-item nav-link" href="/specificmeal/Friday">Friday</a>
+            <a class="nav-item nav-link" href="/specificmeal/Saturday">Saturday</a>
+            <a class="nav-item nav-link" href="/specificmeal/Sunday">Sunday</a>
         </div>
+    </div>
     </div>
     <div>
         <a href="#" class="navbarlink">Link for Inventory</a>
@@ -24,7 +25,7 @@
 
 <div class="jumbotron">
     <h1 class="display-4">Hello, <%= user %>!</h1>
-    <p style="font-weight: bold;">Need to buy The following</p>
+    <p style="font-weight: bold;">Need to buy The following :</p>
     <% inventorydata.forEach(function(inventory){ %>
     <p><%= inventory.name %></p>
     <% }) %>

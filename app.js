@@ -10,7 +10,8 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
-mongoose.connect("mongodb://localhost:27017/mPlanDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+//mongoose.connect("mongodb://localhost:27017/mPlanDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+mongoose.connect("mongodb+srv://admin-anthony:Test123@cluster0-jxcje.mongodb.net/mPlanDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
 const inventorySchema = {
     name: String
@@ -43,6 +44,31 @@ const dailymealSchema = {
 }
 
 const dailyMeal = mongoose.model("meal", dailymealSchema);
+
+const meal1 = new dailyMeal({
+    day: "Sunday",
+    mealForTheDay: {
+        breakfast: {
+            name: "Omelet",
+            recipe: "Egg, Ham, Cheese",
+            link: "https://www.incredibleegg.org/recipe/basic-french-omelet/",
+            video: "https://youtu.be/qXPhVYpQLPA"
+        },
+        lunch: {
+            name: "KFC",
+            recipe: "Secret Recipe",
+            link: "Nearest KFC",
+            video: ""
+        },
+        dinner: {
+            name: "Steak",
+            recipe: "Ribeye, Butter, Herbs",
+            link: "",
+            video: "https://www.youtube.com/watch?v=RVCyeX7AWpE"
+        }
+    }
+});
+meal1.save();
 
 app.get("/", function (req, res) {
 
@@ -100,27 +126,27 @@ app.post("/updatemeal/:specificday", function (req, res) {
     console.log(dname, dingredient, dlink, dvideo);
 
     let newobj = {
-        breakfast : {
-            name : bname,
-            recipe : bingredient,
-            link : blink,
-            video :bvideo
+        breakfast: {
+            name: bname,
+            recipe: bingredient,
+            link: blink,
+            video: bvideo
         },
-        lunch : {
-            name :lname,
-            recipe : lingredient,
-            link : llink,
-            video : lvideo
+        lunch: {
+            name: lname,
+            recipe: lingredient,
+            link: llink,
+            video: lvideo
         },
-        dinner : {
-            name : dname,
-            recipe : dingredient,
-            link : dlink,
-            video : dvideo
+        dinner: {
+            name: dname,
+            recipe: dingredient,
+            link: dlink,
+            video: dvideo
         }
     }
 
-    dailyMeal.findOneAndUpdate({ day: daytobeupdated }, { mealForTheDay: newobj}, function (err) {
+    dailyMeal.findOneAndUpdate({ day: daytobeupdated }, { mealForTheDay: newobj }, function (err) {
         if (!err) {
             console.log("success");
             res.redirect("/specificmeal/" + daytobeupdated);
