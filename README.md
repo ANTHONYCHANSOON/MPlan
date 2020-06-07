@@ -1,6 +1,6 @@
 # Meal Plan
 This app helps couple to plan their meals.
-<img src="https://github.com/ANTHONYCHANSOON/MACE-Project/blob/master/githubimage/Capture.JPG" width=800>
+<img src="https://github.com/ANTHONYCHANSOON/MPlan/blob/master/public/Images/readmeimage.JPG" width=800>
 
 ## NPM / Dependencies
 ```
