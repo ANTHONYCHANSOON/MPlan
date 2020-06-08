@@ -1,0 +1,22 @@
+<%- include("header") -%>
+
+<!-- <% only5.forEach(function(eacharray){ %>
+<h1><%= eacharray %></h1>
+<% }) %> -->
+
+<% only5.forEach(function(eacharray){ %>
+<div class="card" style="width: 18rem;">
+    <img src="<%= eacharray.thumbnail_url %>" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title colorblack"><%= eacharray.name %></h5>
+        <p class="card-text colorblack">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>
+
+<% }) %>
+
+
+
+<%- include("footer") -%>

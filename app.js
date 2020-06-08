@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const unirest = require("unirest");
 
 const app = express();
 
@@ -10,8 +11,8 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
-//mongoose.connect("mongodb://localhost:27017/mPlanDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-mongoose.connect("mongodb+srv://admin-anthony:Test123@cluster0-jxcje.mongodb.net/mPlanDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+mongoose.connect("mongodb://localhost:27017/mPlanDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+// mongoose.connect("mongodb+srv://admin-anthony:Test123@cluster0-jxcje.mongodb.net/mPlanDB", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
 const inventorySchema = {
     name: String
@@ -77,6 +78,57 @@ app.get("/specificmeal/:specificday", function (req, res) {
             })
         }
     })
+})
+
+
+
+app.get("/api", function (req, res) {
+
+    let apipull = {};
+    let only5 = [];
+
+    async function retrieveAPI() {
+        var reqtas = unirest("GET", "https://tasty.p.rapidapi.com/recipes/list");
+        reqtas.query({
+            "tags": "under_30_minutes",
+            "from": "0",
+            "sizes": "80"
+        })
+        reqtas.headers({
+            "x-rapidapi-host": "tasty.p.rapidapi.com",
+            "x-rapidapi-key": "b98198b437mshea0ca9221f948fdp104f05jsneed7015c919a",
+            "useQueryString": true
+        });
+        reqtas.end(function (res) {
+            if (res.error) throw new Error(res.error);
+            //console.log(res.body)
+            apipull = res.body.results
+            //console.log("apipull length " + apipull.length);
+
+            for (let i = 0; i < 20; i++) {
+                // let x = Math.floor(Math.random() * 20);
+                // console.log(x)
+                only5.push(apipull[i]);
+            }
+            //console.log(only5);
+            //console.log(only5.length)
+            // only5.forEach(function (eacharray) {
+            //     console.log(eacharray.name);
+            //     console.log(eacharray.thumbnail_url);
+            //     //console.log(eacharray.instructions[0]);
+            // })
+        });
+    }
+
+    async function executePage() {
+        await retrieveAPI();
+        setTimeout(() => {
+            res.render("api", {
+                only5: only5
+            })
+        }, 3000);
+    }
+    executePage();
 })
 
 app.post("/updatemeal/:specificday", function (req, res) {
