@@ -20,5 +20,8 @@ https://cryptic-anchorage-84856.herokuapp.com/
 * Heroku - Deployment
 * Express and Node.JS
 
+### 3rd Party API
+* https://rapidapi.com/apidojo/api/tasty
+
 ### Authors: 
 * [Anthony-me)] (https://github.com/ANTHONYCHANSOON)
