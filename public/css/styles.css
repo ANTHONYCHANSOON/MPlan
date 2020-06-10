@@ -57,3 +57,7 @@ body {
 .colorblack {
     color: black !important;
 }
+.centerme {
+    margin: 0 auto !important;
+    float: none;
+}
