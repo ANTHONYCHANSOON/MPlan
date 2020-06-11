@@ -83,15 +83,15 @@
 
 
 
-<% searchedquery.forEach(function(item){ %>
-    <ul>
-        <li>name : <%= item.name %></li>
-        <li><%= item.thumbnail_url%></li>
-        <li>instructions :</li>
-        <ol>
-            item.insturctions.forEach(function(steps){
-            <li>steps.name</li>
-            })
-        </ol>
-    </ul>
-    <%})%>
+// <% searchedquery.forEach(function(item){ %>
+//     <ul>
+//         <li>name : <%= item.name %></li>
+//         <li><%= item.thumbnail_url%></li>
+//         <li>instructions :</li>
+//         <ol>
+//             item.insturctions.forEach(function(steps){
+//             <li>steps.name</li>
+//             })
+//         </ol>
+//     </ul>
+//     <%})%>
