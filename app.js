@@ -109,16 +109,22 @@ app.post("/api/specificingredient", function (req, res) {
         reqtas.end(function (res) {
             if (res.error) throw new Error(res.error);
             searchedquery = res.body.results;
-            console.log(searchedquery);
+            //console.log(searchedquery[0].instructions);
         });
     }
     async function executePage() {
         await retrieveAPI();
-        setTimeout(() => {
-            res.render("api", {
-                searchedquery: searchedquery
-            })
-        }, 3000);
+
+        if (searchedquery === {}) {
+            res.redirect("/apipage");
+        } else {
+
+            setTimeout(() => {
+                res.render("api", {
+                    searchedquery: searchedquery
+                })
+            }, 3000);
+        }
     }
     executePage();
 })

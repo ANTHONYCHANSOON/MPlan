@@ -7,17 +7,45 @@
             <input type="text" name="searchme" placeholder="Specific Ingredient" autocomplete="off">
             <button class="buttonaddinventory1" type="submit">Search</button>
         </form>
-
+        <br>
     </div>
-    <% if(searchedquery === "") { %>
-    <h1>begin search</h1>
-    <%} else { %>
-    <% searchedquery.forEach(function(asdfasdf){ %>
-    <h4><%= asdfasdf %></h4>
-    <% }) %>
-    <% } %>
 
+    <div>
+        <% if(searchedquery === "") { %>
+        <h1>begin search</h1>
+        <%} else { %>
 
+        <% searchedquery.forEach(function(asdfasdf){ %>
+        <h4 class="text-center"><%= asdfasdf.name %></h4>
+        
+        <div class="container">
+            <div class="row">
+              <div class="col">
+                <img src="<%= asdfasdf.thumbnail_url %>" width="400px">
+              </div>
+              <div class="col">
+                <video width="400px" controls>
+                    <source src="<%= asdfasdf.original_video_url%>" type="video/mp4">
+                </video>
+              </div>
+            </div>
+        </div>
+        
+        
+
+        <% let loopmehere = asdfasdf.instructions %>
+        <h5>Steps:</h5>
+        <ol>
+            <% loopmehere.forEach(function(steps){ %>
+            <li><%= steps.display_text %></li>
+            <% }) %>
+        </ol>
+        
+        <% }) %>
+        <% } %>
+
+        <br>
+    </div>
 </div>
 
 <%- include("footer") -%>
