@@ -47,3 +47,9 @@
             <a class="nav-item nav-link" href="#Friday">Friday</a>
             <a class="nav-item nav-link" href="#Saturday">Saturday</a>
             <a class="nav-item nav-link" href="#Sunday">Sunday</a> */}
+
+// const newinv = new Inventory({
+//     name: "sample"
+// })
+
+// newinv.save();

@@ -20,6 +20,8 @@ const inventorySchema = {
 
 const Inventory = mongoose.model("inventory", inventorySchema);
 
+
+
 const dailymealSchema = {
     day: String,
     mealForTheDay: {
@@ -177,6 +179,32 @@ app.post("/updatemeal/:specificday", function (req, res) {
         if (!err) {
             console.log("success");
             res.redirect("/specificmeal/" + daytobeupdated);
+        }
+    })
+})
+
+app.post("/addinventory", function(req, res) {
+    let newEnt = req.body.newinventory;
+    
+    function saveMongo () {
+        const newInv = new Inventory({
+            name : newEnt
+        });
+        newInv.save();
+    }
+    
+    function redirecting() {
+        saveMongo();
+        res.redirect("/inventory");
+    }
+    redirecting();
+})
+
+app.post("/deleteinventory", (req, res)=>{
+    const itemdelete = req.body.checkBox;
+    Inventory.findByIdAndRemove(itemdelete, function(err){
+        if(!err) {
+            res.redirect("/inventory");
         }
     })
 })
