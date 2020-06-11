@@ -2,30 +2,21 @@
 
 <div class="wrapper">
     <div class="text-center">
-        <form action="/api/specificingredient" method="get">
 
-            <label>Ingredient</label>
-            <input type="text" name="searchingredient" placeholder="Not yet working">
-            <button type="submit">Search</button>
-
+        <form action="/api/specificingredient" method="POST">
+            <input type="text" name="searchme" placeholder="Specific Ingredient" autocomplete="off">
+            <button class="buttonaddinventory1" type="submit">Search</button>
         </form>
-    </div>
 
-    <div class="text-center">
-        <% only5.forEach(function(eacharray){ %>
-        <div class="card text-center" style="width: 18rem;">
-            <img src="<%= eacharray.thumbnail_url %>" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title colorblack"><%= eacharray.name %></h5>
-                <p class="card-text colorblack">Some quick example text to build on the card title and make up the bulk
-                    of
-                    the card's
-                    content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-        <% }) %>
     </div>
+    <% if(searchedquery === "") { %>
+    <h1>begin search</h1>
+    <%} else { %>
+    <% searchedquery.forEach(function(asdfasdf){ %>
+    <h4><%= asdfasdf %></h4>
+    <% }) %>
+    <% } %>
+
 
 </div>
 

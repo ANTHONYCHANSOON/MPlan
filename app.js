@@ -82,17 +82,22 @@ app.get("/specificmeal/:specificday", function (req, res) {
     })
 })
 
+let searchedquery = {};
 
+app.get("/apipage", function (req, res) {
+    res.render("api", {
+        searchedquery: ""
+    })
+})
 
-app.get("/api", function (req, res) {
-
-    let apipull = {};
-    let only5 = [];
+app.post("/api/specificingredient", function (req, res) {
+    let searchItem = req.body.searchme;
+    var reqtas = unirest("GET", "https://tasty.p.rapidapi.com/recipes/list");
 
     async function retrieveAPI() {
-        var reqtas = unirest("GET", "https://tasty.p.rapidapi.com/recipes/list");
         reqtas.query({
             "tags": "under_30_minutes",
+            "q": searchItem,
             "from": "0",
             "sizes": "80"
         })
@@ -103,24 +108,58 @@ app.get("/api", function (req, res) {
         });
         reqtas.end(function (res) {
             if (res.error) throw new Error(res.error);
-            apipull = res.body.results
-
-            for (let i = 0; i < 20; i++) {
-                only5.push(apipull[i]);
-            }
+            searchedquery = res.body.results;
+            console.log(searchedquery);
         });
     }
-
     async function executePage() {
         await retrieveAPI();
         setTimeout(() => {
             res.render("api", {
-                only5: only5
+                searchedquery: searchedquery
             })
         }, 3000);
     }
     executePage();
 })
+
+// app.get("/api", function (req, res) {
+
+//     let apipull = {};
+//     let only5 = [];
+
+//     async function retrieveAPI() {
+//         var reqtas = unirest("GET", "https://tasty.p.rapidapi.com/recipes/list");
+//         reqtas.query({
+//             "tags": "under_30_minutes",
+//             "from": "0",
+//             "sizes": "80"
+//         })
+//         reqtas.headers({
+//             "x-rapidapi-host": "tasty.p.rapidapi.com",
+//             "x-rapidapi-key": "b98198b437mshea0ca9221f948fdp104f05jsneed7015c919a",
+//             "useQueryString": true
+//         });
+//         reqtas.end(function (res) {
+//             if (res.error) throw new Error(res.error);
+//             apipull = res.body.results
+
+//             for (let i = 0; i < 20; i++) {
+//                 only5.push(apipull[i]);
+//             }
+//         });
+//     }
+
+//     async function executePage() {
+//         await retrieveAPI();
+//         setTimeout(() => {
+//             res.render("api", {
+//                 only5: only5
+//             })
+//         }, 3000);
+//     }
+//     executePage();
+// })
 
 app.get("/inventory", function (req, res) {
     Inventory.find({}, function (err, data) {
@@ -183,16 +222,16 @@ app.post("/updatemeal/:specificday", function (req, res) {
     })
 })
 
-app.post("/addinventory", function(req, res) {
+app.post("/addinventory", function (req, res) {
     let newEnt = req.body.newinventory;
-    
-    function saveMongo () {
+
+    function saveMongo() {
         const newInv = new Inventory({
-            name : newEnt
+            name: newEnt
         });
         newInv.save();
     }
-    
+
     function redirecting() {
         saveMongo();
         res.redirect("/inventory");
@@ -200,10 +239,10 @@ app.post("/addinventory", function(req, res) {
     redirecting();
 })
 
-app.post("/deleteinventory", (req, res)=>{
+app.post("/deleteinventory", (req, res) => {
     const itemdelete = req.body.checkBox;
-    Inventory.findByIdAndRemove(itemdelete, function(err){
-        if(!err) {
+    Inventory.findByIdAndRemove(itemdelete, function (err) {
+        if (!err) {
             res.redirect("/inventory");
         }
     })
